@@ -1,9 +1,9 @@
 {
   "name": "create-resume",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create resume with markdown",
   "main": "index.js",
-  "bin": "./bin/create-resume",
+  "bin": "./bin/create-resume.js",
   "scripts": {
     "demo": "node ./bin/create-resume ./demo/resume.md",
     "demo:pdf": "node ./bin/create-resume --output pdf ./demo/resume.md"
