@@ -1,6 +1,6 @@
 {
   "name": "create-resume",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Create resume with markdown",
   "main": "index.js",
   "bin": "./bin/create-resume.js",
