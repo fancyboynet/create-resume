@@ -4,6 +4,10 @@
   "description": "Create resume with markdown",
   "main": "index.js",
   "bin": "./bin/create-resume",
+  "scripts": {
+    "demo": "node ./bin/create-resume ./demo/resume.md",
+    "demo:pdf": "node ./bin/create-resume --output pdf ./demo/resume.md"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fancyboynet/create-resume.git"
