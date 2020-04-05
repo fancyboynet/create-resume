@@ -6,6 +6,7 @@ const shell = require('shelljs')
 const argv = require('yargs').argv
 const { log } = require('./utils')
 const showdown  = require('showdown')
+const pdf = require('html-pdf')
 
 const filePathParam = argv._[0]
 if (!filePathParam) {
@@ -17,6 +18,11 @@ if (!fs.existsSync(filePath)){
   log.error('The md file path does not exist')
   shell.exit(1)
 }
+
+const output = argv.output
+
+const htmlFilePath = filePath.replace(/\.md$/i, '.html')
+const pdfFilePath = filePath.replace(/\.md$/i, '.pdf')
 
 const styleFile = path.resolve(process.cwd(), './node_modules/github-markdown-css/github-markdown.css')
 
@@ -68,14 +74,28 @@ async function getContent () {
 }
 
 async function writeHtml (html) {
-  return await fsPromises.writeFile(filePath.replace(/\.md$/i, '.html'), html, 'utf8')
+  return await fsPromises.writeFile(htmlFilePath, html, 'utf8')
 }
 
-async function convertToHtml() {
+async function getHtml() {
   const content = await getContent()
   const style = await getStyle()
   const html = renderHtml(content, style)
-  await writeHtml(html)
+  return html
 }
 
-convertToHtml()
+async function writePdf (html) {
+  pdf.create(html).toFile(pdfFilePath, function(err, res) {
+    if (err) return log.error(err.message);
+  })
+}
+
+getHtml().then((html) => {
+  if (output === 'pdf') {
+    writePdf(html)
+  } else {
+    writeHtml(html)
+  }
+})
+
+

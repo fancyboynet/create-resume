@@ -7,6 +7,16 @@
 $ yarn create resume ./resume.md
 ```
 ```
-$ yarn create resume --pdf ./resume.md  // pdf
+$ yarn create resume --output pdf ./resume.md  // output pdf
 ```
 
+## Output type
+
+- html (default)
+- pdf
+
+## Dependencies
+
+- showdown
+- html-pdf
+- github-markdown-css
